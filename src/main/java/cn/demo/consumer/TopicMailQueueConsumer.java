@@ -28,7 +28,9 @@ import java.io.IOException;
 				type = ExchangeTypes.TOPIC, ignoreDeclarationExceptions = "true"),
 		key = {MessageConstant.RouteName.message_route}))
 public class TopicMailQueueConsumer {
-	
+
+
+
 	@RabbitHandler
 	public void handleMessage(String data, Message message, Channel channel) {
 		Long deliveryTag = message.getMessageProperties().getDeliveryTag();
