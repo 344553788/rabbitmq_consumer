@@ -1,14 +1,9 @@
 package cn.demo.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.QueueBuilder;
+import cn.demo.constant.MessageConstant;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import cn.demo.constant.MessageConstant;
 
 @Configuration
 public class RabbitConfig {
@@ -63,17 +58,6 @@ public class RabbitConfig {
 
 
 
-	// 广播跟route-key 无关
-//	@Bean
-//	public Binding fanoutBinding() {
-//		return BindingBuilder.bind(fanoutQueue()).to(fanoutExchange());
-//	}
-//
-//	@Bean
-//	public Binding topicBinding() {
-//		return BindingBuilder.bind(topicQueue()).to(topicExchange()).with(MessageConstant.RouteName.TOPIC_ROUTE);
-//	}
-
 //	@Bean
 //	Binding directBinding() {
 //		return BindingBuilder.bind(directQueue()).to(directExchange()).with(MessageConstant.Route.DIRECT_ROUTE);
@@ -99,9 +83,7 @@ public class RabbitConfig {
 		return new DirectExchange(MessageConstant.Exchange.DLX_EXCHANGE, true, false);
 	}
 
-	/**
-	 * 死信路由通过 DELAY_ROUTE 绑定键绑定到死信队列上.
-	 */
+
 	@Bean
 	Binding dlxBinding() {
 		return BindingBuilder.bind(deadLetterQueue()).to(deadLetterExchange())
